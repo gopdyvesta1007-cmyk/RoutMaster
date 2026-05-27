@@ -11,5 +11,26 @@ namespace RouteMaster.Database
         {
             return new NpgsqlConnection(_connectionString);
         }
+
+        public static void SetConnectionString(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
+        public static bool TestConnection()
+        {
+            try
+            {
+                using (var conn = GetConnection())
+                {
+                    conn.Open();
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

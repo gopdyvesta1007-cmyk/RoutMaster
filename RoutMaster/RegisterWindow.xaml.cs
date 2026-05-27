@@ -11,20 +11,20 @@ namespace RouteMaster
             InitializeComponent();
 
             RegisterBtn.Click += RegisterBtn_Click;
-            CancelBtn.Click += (s, e) => this.Close();
+            CancelBtn.Click += (s, e) => Close();
         }
 
         private async void RegisterBtn_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(FullNameBox.Text) || string.IsNullOrWhiteSpace(EmailBox.Text))
             {
-                MessageBox.Show("Заполните ФИО и Email", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Заполните ФИО и Email");
                 return;
             }
 
             if (PasswordBox.Password != ConfirmPasswordBox.Password)
             {
-                MessageBox.Show("Пароли не совпадают", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Пароли не совпадают");
                 return;
             }
 
@@ -37,16 +37,16 @@ namespace RouteMaster
                 RoleId = 1
             };
 
-            var result = await App.DatabaseService.RegisterUser(user);
+            bool result = await App.DatabaseService.RegisterUser(user);
 
             if (result)
             {
-                MessageBox.Show("Регистрация успешна!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-                this.Close();
+                MessageBox.Show("Регистрация успешна!");
+                Close();
             }
             else
             {
-                MessageBox.Show("Ошибка регистрации", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Ошибка регистрации");
             }
         }
     }

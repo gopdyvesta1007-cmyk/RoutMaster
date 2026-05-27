@@ -31,7 +31,7 @@ namespace RouteMaster
             {
                 var mainWindow = new MainWindow(user);
                 mainWindow.Show();
-                this.Close();
+                Close();
             }
             else
             {
