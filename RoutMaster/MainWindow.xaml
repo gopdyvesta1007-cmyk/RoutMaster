@@ -1,0 +1,91 @@
+﻿<Window x:Class="RouteMaster.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="RouteMaster - Главная" Height="600" Width="1000"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Верхняя панель -->
+        <Border Grid.Row="0" Background="#1976D2" Padding="10">
+            <Grid>
+                <TextBlock Text="RouteMaster" FontSize="20" FontWeight="Bold" Foreground="White"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBlock x:Name="UserInfoText" Foreground="White" VerticalAlignment="Center" Margin="0,0,15,0"/>
+                    <Button x:Name="LogoutButton" Content="Выход" Background="#FF5722" Foreground="White" Padding="10,5"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Табы -->
+        <TabControl Grid.Row="1" Margin="10">
+            <TabItem Header="Все заказы">
+                <DataGrid x:Name="AllOrdersDataGrid" AutoGenerateColumns="False" Margin="5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="№" Binding="{Binding OrderNumber}" Width="120"/>
+                        <DataGridTextColumn Header="Клиент" Binding="{Binding ClientName}" Width="150"/>
+                        <DataGridTextColumn Header="Откуда" Binding="{Binding PickupCity}" Width="120"/>
+                        <DataGridTextColumn Header="Куда" Binding="{Binding DeliveryCity}" Width="120"/>
+                        <DataGridTextColumn Header="Статус" Binding="{Binding CurrentStatus}" Width="120"/>
+                        <DataGridTextColumn Header="Дата" Binding="{Binding CreatedAt,StringFormat='dd.MM.yyyy'}" Width="100"/>
+                        <DataGridTemplateColumn Header="Детали" Width="80">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Просмотр" Tag="{Binding}" Click="ViewOrderDetails" Background="#4CAF50" Foreground="White" Padding="8,3"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <TabItem Header="Мои заказы">
+                <DataGrid x:Name="MyOrdersDataGrid" AutoGenerateColumns="False" Margin="5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="№" Binding="{Binding OrderNumber}" Width="120"/>
+                        <DataGridTextColumn Header="Откуда" Binding="{Binding PickupCity}" Width="120"/>
+                        <DataGridTextColumn Header="Куда" Binding="{Binding DeliveryCity}" Width="120"/>
+                        <DataGridTextColumn Header="Статус" Binding="{Binding CurrentStatus}" Width="120"/>
+                        <DataGridTextColumn Header="Дата" Binding="{Binding CreatedAt,StringFormat='dd.MM.yyyy'}" Width="100"/>
+                        <DataGridTemplateColumn Header="Детали" Width="80">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Просмотр" Tag="{Binding}" Click="ViewOrderDetails" Background="#4CAF50" Foreground="White" Padding="8,3"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <TabItem Header="Избранное">
+                <DataGrid x:Name="FavoriteOrdersDataGrid" AutoGenerateColumns="False" Margin="5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="№" Binding="{Binding OrderNumber}" Width="120"/>
+                        <DataGridTextColumn Header="Клиент" Binding="{Binding ClientName}" Width="150"/>
+                        <DataGridTextColumn Header="Откуда" Binding="{Binding PickupCity}" Width="120"/>
+                        <DataGridTextColumn Header="Куда" Binding="{Binding DeliveryCity}" Width="120"/>
+                        <DataGridTextColumn Header="Статус" Binding="{Binding CurrentStatus}" Width="120"/>
+                        <DataGridTemplateColumn Header="Детали" Width="80">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Просмотр" Tag="{Binding}" Click="ViewOrderDetails" Background="#4CAF50" Foreground="White" Padding="8,3"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+
+        <!-- Статус бар -->
+        <Border Grid.Row="2" Background="#1976D2" Padding="5">
+            <TextBlock x:Name="StatusBarText" Foreground="White" FontSize="11"/>
+        </Border>
+    </Grid>
+</Window>
